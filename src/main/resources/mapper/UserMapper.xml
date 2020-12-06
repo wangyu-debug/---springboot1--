@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hengzhi.demo.mapper.UserMapper">
+<!--    查找-->
+    <select id="getSex" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT sex
+        FROM user
+        WHERE username = #{username}
+    </select>
+<!--    增加-->
+    <insert id="addUser" parameterType="com.hengzhi.demo.bean.User">
+        INSERT INTO user
+        <set>
+            username = #{username},
+            <if test="sex!=null and sex!=''" >
+                  `sex`=#{sex},
+            </if>
+        </set>
+    </insert>
+<!--    删除-->
+    <delete id="deleteUser" parameterType="java.lang.Integer">
+        DELETE
+        FROM user
+        WHERE id = #{id}
+    </delete>
+<!--    修改-->
+    <update id="updateUser" parameterType="java.lang.Integer">
+        UPDATE user
+        <set>
+            username = #{username},
+            <if test="sex!=null and sex!=''" >
+                `sex`=#{sex},
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+</mapper>
